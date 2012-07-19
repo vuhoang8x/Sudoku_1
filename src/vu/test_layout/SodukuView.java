@@ -8,6 +8,7 @@ import android.graphics.Paint.FontMetrics;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 public class SodukuView extends View 
@@ -35,6 +36,36 @@ public class SodukuView extends View
 	private void getRect(int x, int y, Rect rect)
 	{
 		rect.set((int)(x*width), (int)(y*height), (int)(x*width+width), (int)(y*height + height));
+	}
+	private void select (int x, int y)
+	{
+		invalidate(selRect);
+		selX = Math.min(Math.max(x, 0), 8);
+		selY = Math.min(Math.max(y, 0), 8);
+		getRect(selX, selY, selRect);
+		invalidate(selRect);
+	}
+	@Override 
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		switch (keyCode)
+		{
+		case KeyEvent.KEYCODE_DPAD_UP:
+			select(selX, selY - 1);
+			break;
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+			select(selX, selY + 1);
+			break;
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+			select(selX - 1, selY);
+			break;
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			select(selX + 1, selY);
+			break;
+			default:
+				return super.onKeyDown(keyCode, event);
+		}
+		return true;
 	}
 	@Override
 	protected void onDraw (Canvas canvas)
@@ -84,6 +115,11 @@ public class SodukuView extends View
 		float y = height/2 - (fm.ascent + fm.descent)/2;
 		for (int i = 0; i < 9; i++)
 			for (int j = 0; j < 9; j++)
-				canvas.drawText("X", i * width + x, j * height + y, foreground);
+				canvas.drawText(game.getTileString(i, j), i * width + x, j * height + y, foreground);
+		
+		//Draw selected tile
+		Paint selected = new Paint();
+		selected.setColor(getResources().getColor(R.color.selected));
+		canvas.drawRect(selRect, selected);
 	}
 }

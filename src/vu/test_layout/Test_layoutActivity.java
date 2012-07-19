@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,10 +50,12 @@ public class Test_layoutActivity extends Activity implements OnClickListener{
     }
     public void startGame (int dif)
     {
-    	String d = "abc " + dif;
+    	String d = "" + dif;
     	((TextView)findViewById(R.id.lblResult)).setText(d);
-    	Intent intent = new Intent(Test_layoutActivity.this, Game.class);
-    	
+    	Intent intent = new Intent(Test_layoutActivity.this, Game.class); 
+    	Bundle test = new Bundle();
+    	test.putInt("diff", dif);
+    	intent.putExtras(test);
     	startActivity(intent);
     }
 }
