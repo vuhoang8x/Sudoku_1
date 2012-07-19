@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Android Sudoku</string>
+    <string name="app_name">Test_layout</string>
+    <string name="main_continue">Continue</string>
+    <string name="main_new">New game</string>
+    <string name="main_about">About</string>
+    <string name="main_exit">Exit</string>
+    <string name="new_game_title">Difficulty</string>
+    <string name="easy_label">Easy</string>
+    <string name="medium_label">Medium</string>
+    <string name="hard_label">Hard</string>
+	<string name="board">Soduku Board</string>
+</resources>
