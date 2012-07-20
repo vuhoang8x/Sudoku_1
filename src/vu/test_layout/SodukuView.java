@@ -155,6 +155,28 @@ public class SodukuView extends View
 	}
 	public void setSelectedTile (int value)
 	{
-		
+		Log.d("Input ", String.valueOf(value));
+		if (value == 0)
+		{
+			game.setTile(selX, selY, 0);
+			invalidate();
+		}
+		else
+		{
+			int box[] = game.getValidOfBox(selX, selY);
+			boolean valid = true;
+			for (int i = 0; i < box.length; i++)
+			{
+				if (value == box[i])
+				{
+					valid = false;
+				}
+			}
+			if (valid)
+			{
+				game.setTile(selX, selY, value);
+				invalidate();
+				}
+		}
 	}
 }

@@ -93,6 +93,7 @@ public class Game extends Activity
 		int rx = 0, ry = 0;
 		for (int zx = beginX; zx < beginX + 3; zx++)
 		{
+			ry = 0;
 			for (int zy = beginY; zy < beginY + 3; zy++)
 			{
 				valid[rx * 3 + ry++] = soduku[zx][zy];
@@ -103,7 +104,7 @@ public class Game extends Activity
 	}
 	public void setTile(int x, int y, int value)
 	{
-		
+		soduku[x][y] = value;
 	}
 	public boolean setTileIfValid (int x, int y, int value)
 	{
