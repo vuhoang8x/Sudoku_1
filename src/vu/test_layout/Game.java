@@ -73,11 +73,7 @@ public class Game extends Activity
 		if (soduku[x][y] == 0)
 			return "";
 		return String.valueOf(soduku[x][y]);
-	}
-	public void setTile(int x, int y, int value)
-	{
-		soduku[x][y] = value;
-	}
+	}	
 	public int[] getValidOfBox(int x, int y)
 	{
 		int valid[] = new int[9];
@@ -102,8 +98,16 @@ public class Game extends Activity
 				valid[rx * 3 + ry++] = soduku[zx][zy];
 			}
 			rx++;
-		}
-		
+		}		
 		return valid;
+	}
+	public void setTile(int x, int y, int value)
+	{
+		
+	}
+	public boolean setTileIfValid (int x, int y, int value)
+	{
+		
+		return false;
 	}
 }
