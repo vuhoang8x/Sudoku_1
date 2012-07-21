@@ -91,7 +91,11 @@ public class SodukuView extends View
 			setSelectedTile(8);
 			break;
 		case KeyEvent.KEYCODE_9:
-			setSelectedTile(9);
+			setSelectedTile(9);			
+			break;
+		case KeyEvent.KEYCODE_ENTER:
+		case KeyEvent.KEYCODE_DPAD_CENTER:
+			game.showKeyPad(selX, selY);
 			break;
 			default:
 				return super.onKeyDown(keyCode, event);
