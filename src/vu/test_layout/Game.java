@@ -1,6 +1,7 @@
 package vu.test_layout;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,17 +79,17 @@ public class Game extends Activity
 	{
 		int valid[] = new int[9];
 		int beginX = 0, beginY = 0;
-		if (x <= 3)
+		if (x < 3)
 			beginX = 0;
-		else if (x <= 6)
+		else if (x < 6)
 			beginX = 3;
-		else if (x <= 9)
+		else if (x < 9)
 			beginX = 6;
-		if (y <= 3)
+		if (y < 3)
 			beginY = 0;
-		else if (y <= 6)
+		else if (y < 6)
 			beginY = 3;
-		else if (y <= 9)
+		else if (y < 9)
 			beginY = 6;
 		int rx = 0, ry = 0;
 		for (int zx = beginX; zx < beginX + 3; zx++)
@@ -108,7 +109,24 @@ public class Game extends Activity
 	}
 	public boolean setTileIfValid (int x, int y, int value)
 	{
-		
-		return false;
+		boolean valid = true;
+		int box[] = getValidOfBox(x, y);
+		for (int i = 0; i < box.length; i++)
+		{
+			if (value == box[i])
+			{
+				valid = false;
+			}
+		}
+		if (valid)
+		{
+			setTile(x, y, value);
+		}
+		return valid;
+	}
+	public void showKeyPad (int x, int y)
+	{		
+		Dialog bach = new KeyPad(this, getValidOfBox(x, y), sodukuView);
+		bach.show();
 	}
 }

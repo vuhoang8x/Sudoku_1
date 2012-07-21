@@ -155,7 +155,7 @@ public class SodukuView extends View
 	}
 	public void setSelectedTile (int value)
 	{
-		Log.d("Input ", String.valueOf(value));
+		Log.d("Input ", "X: " + String.valueOf(selX) + " Y: " + String.valueOf(selY) + "--" + String.valueOf(value));
 		if (value == 0)
 		{
 			game.setTile(selX, selY, 0);
@@ -163,20 +163,10 @@ public class SodukuView extends View
 		}
 		else
 		{
-			int box[] = game.getValidOfBox(selX, selY);
-			boolean valid = true;
-			for (int i = 0; i < box.length; i++)
-			{
-				if (value == box[i])
-				{
-					valid = false;
-				}
-			}
-			if (valid)
-			{
-				game.setTile(selX, selY, value);
+			if (game.setTileIfValid(selX, selY, value))
 				invalidate();
-				}
+			else
+				game.showKeyPad(selX, selY);
 		}
 	}
 }
