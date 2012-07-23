@@ -30,7 +30,7 @@ public class KeyPad extends Dialog
 		for (int element = 0; element < valid.length; element++)
 		{
 			if (valid[element] != 0/* || game.checkValidOfColRow(x, y, valid[element]) == false*/)
-				key[element].setVisibility(View.INVISIBLE);
+				key[valid[element]-1].setVisibility(View.INVISIBLE);
 		}
 		setListeners();
 	}
