@@ -23,6 +23,8 @@ public class Game extends Activity
 									  "000720903090301080000000600";
 	public int soduku[][] = new int[9][9];
 	public int uselog[] = new int[9*9];
+	public static final int maxrow = 9;
+	public static final int maxcol = 9;
 	public SodukuView sodukuView;
 	protected static String sudoku_tile = "";
 	protected int diff = 0;
@@ -96,12 +98,28 @@ public class Game extends Activity
 		{
 			ry = 0;
 			for (int zy = beginY; zy < beginY + 3; zy++)
-			{
+			{				
 				valid[rx * 3 + ry++] = soduku[zx][zy];
 			}
 			rx++;
 		}		
 		return valid;
+	}
+	public boolean checkValidOfColRow (int x, int y, int value)
+	{
+		//check row
+		for (int i = 0; i < maxcol; i++)
+		{
+			if (soduku[x][i] == value)
+				return false;
+		}
+		//check column
+		for (int i = 0; i < maxrow; i++)
+		{
+			if (soduku[i][y] == value)
+				return false;
+		}
+		return true;
 	}
 	public void setTile(int x, int y, int value)
 	{
@@ -122,11 +140,13 @@ public class Game extends Activity
 		{
 			setTile(x, y, value);
 		}
+		//Check row and column
+		valid = checkValidOfColRow(x, y, value);
 		return valid;
 	}
 	public void showKeyPad (int x, int y)
 	{		
-		Dialog bach = new KeyPad(this, getValidOfBox(x, y), sodukuView);
+		Dialog bach = new KeyPad(this, this, getValidOfBox(x, y), sodukuView, x, y);
 		bach.show();
 	}
 }

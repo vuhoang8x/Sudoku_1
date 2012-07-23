@@ -9,13 +9,17 @@ public class KeyPad extends Dialog
 {
 	int valid[];
 	SodukuView soduku;
+	Game game;
 	View key[] = new View[9];
-	
-	public KeyPad (Context context, int used[], SodukuView soduku)
+	int x, y;
+	public KeyPad (Context context, Game game, int used[], SodukuView soduku, int x, int y)
 	{
 		super (context);
+		this.game = game;
 		valid = used;
 		this.soduku = soduku;
+		this.x = x;
+		this.y = y;
 	}
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -25,7 +29,7 @@ public class KeyPad extends Dialog
 		findViews();
 		for (int element = 0; element < valid.length; element++)
 		{
-			if (valid[element] != 0)
+			if (valid[element] != 0/* || game.checkValidOfColRow(x, y, valid[element]) == false*/)
 				key[element].setVisibility(View.INVISIBLE);
 		}
 		setListeners();
@@ -51,8 +55,7 @@ public class KeyPad extends Dialog
 				
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if (isValid(value))
-						resultKeyPress(value);
+					resultKeyPress(value);
 				}
 			});
 		}
