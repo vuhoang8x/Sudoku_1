@@ -7,35 +7,35 @@
     <TableRow>
         <Button 
             android:id="@+id/keypad_1"
-            android:text="1"/>
+            android:text=" 1 "/>
         <Button 
             android:id="@+id/keypad_2"
-            android:text="2"/>
+            android:text=" 2 "/>
         <Button 
             android:id="@+id/keypad_3"
-            android:text="3"/>
+            android:text=" 3 "/>
     </TableRow>
     <TableRow>
         <Button 
             android:id="@+id/keypad_4"
-            android:text="4"/>
+            android:text=" 4 "/>
         <Button 
             android:id="@+id/keypad_5"
-            android:text="5"/>
+            android:text=" 5 "/>
         <Button 
             android:id="@+id/keypad_6"
-            android:text="6"/>
+            android:text=" 6 "/>
     </TableRow>
     <TableRow>
         <Button 
             android:id="@+id/keypad_7"
-            android:text="7"/>
+            android:text=" 7 "/>
         <Button 
             android:id="@+id/keypad_8"
-            android:text="8"/>
+            android:text=" 8 "/>
         <Button 
             android:id="@+id/keypad_9"
-            android:text="9"/>
+            android:text=" 9 "/>
     </TableRow>
 
 </TableLayout>

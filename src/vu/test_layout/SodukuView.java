@@ -167,10 +167,15 @@ public class SodukuView extends View
 		}
 		else
 		{
-			if (game.setTileIfValid(selX, selY, value))
+			if (game.checkTileIfValid(selX, selY, value) && game.checkValidOfColRow(selX, selY, value))
+			{
+				game.setTile(selX, selY, value);
 				invalidate();
+			}
 			else
+			{
 				game.showKeyPad(selX, selY);
+			}
 		}
 	}
 }

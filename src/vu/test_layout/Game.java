@@ -105,6 +105,21 @@ public class Game extends Activity
 		}		
 		return valid;
 	}
+	public int[] getValidOfRowCol (int x, int y)
+	{
+		int valid[] = new int[18];
+		int idx = 0;
+		//Collect row
+		for (int i = 0; i < maxcol; i++)
+		{
+			valid[idx++] = soduku[x][i];
+		}
+		for (int i = 0; i < maxrow; i++)
+		{
+			valid[idx++] = soduku[i][y];
+		}
+		return valid;
+	}
 	public boolean checkValidOfColRow (int x, int y, int value)
 	{
 		//check row
@@ -125,7 +140,7 @@ public class Game extends Activity
 	{
 		soduku[x][y] = value;
 	}
-	public boolean setTileIfValid (int x, int y, int value)
+	public boolean checkTileIfValid (int x, int y, int value)
 	{
 		boolean valid = true;
 		int box[] = getValidOfBox(x, y);
@@ -135,18 +150,12 @@ public class Game extends Activity
 			{
 				valid = false;
 			}
-		}
-		if (valid)
-		{
-			setTile(x, y, value);
-		}
-		//Check row and column
-		valid = checkValidOfColRow(x, y, value);
+		}		
 		return valid;
 	}
 	public void showKeyPad (int x, int y)
 	{		
-		Dialog bach = new KeyPad(this, this, getValidOfBox(x, y), sodukuView, x, y);
+		Dialog bach = new KeyPad(this, this, getValidOfBox(x, y), sodukuView, getValidOfRowCol(x, y));
 		bach.show();
 	}
 }

@@ -3,23 +3,23 @@ package vu.test_layout;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class KeyPad extends Dialog 
 {
-	int valid[];
+	int valid[], usedRowCol[];
 	SodukuView soduku;
 	Game game;
 	View key[] = new View[9];
 	int x, y;
-	public KeyPad (Context context, Game game, int used[], SodukuView soduku, int x, int y)
+	public KeyPad (Context context, Game game, int used[], SodukuView soduku, int usedRowCol[])
 	{
 		super (context);
 		this.game = game;
 		valid = used;
+		this.usedRowCol = usedRowCol;
 		this.soduku = soduku;
-		this.x = x;
-		this.y = y;
 	}
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -27,10 +27,17 @@ public class KeyPad extends Dialog
 		setTitle("Keypad");		
 		setContentView(R.layout.keypad);
 		findViews();
+		//Filter box (3x3)
 		for (int element = 0; element < valid.length; element++)
 		{
-			if (valid[element] != 0/* || game.checkValidOfColRow(x, y, valid[element]) == false*/)
+			if (valid[element] != 0)
 				key[valid[element]-1].setVisibility(View.INVISIBLE);
+		}
+		//Filter row, column
+		for (int element = 0; element < usedRowCol.length; element++)
+		{
+			if (usedRowCol[element] != 0)
+				key[usedRowCol[element]-1].setVisibility(View.INVISIBLE);
 		}
 		setListeners();
 	}
@@ -55,13 +62,15 @@ public class KeyPad extends Dialog
 				
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					resultKeyPress(value);
+					if (isValid(value))
+						resultKeyPress(value);
 				}
 			});
 		}
 	}
 	protected void resultKeyPress(int value)
 	{
+		Log.d("KeyPad ", "Call resultKeyPress");
 		soduku.setSelectedTile(value);
 		dismiss();
 	}
@@ -69,7 +78,7 @@ public class KeyPad extends Dialog
 	{
 		for (int i = 0; i < valid.length;i++)
 			if (valid[i] == value)
-				return false;
+				return false;		
 		return true;
 	}
 }
