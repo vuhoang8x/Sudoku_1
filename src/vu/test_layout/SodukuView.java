@@ -2,6 +2,7 @@ package vu.test_layout;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetrics;
@@ -18,6 +19,7 @@ public class SodukuView extends View
 	private int selX;
 	private int selY;
 	private final Rect selRect = new Rect();
+	private Rect filter = new Rect();
 	public final Game game;
 	public SodukuView(Context context)
 	{
@@ -149,18 +151,39 @@ public class SodukuView extends View
 		float x = width/2;
 		float y = height/2 - (fm.ascent + fm.descent)/2;
 		for (int i = 0; i < 9; i++)
+		{
 			for (int j = 0; j < 9; j++)
+			{
 				canvas.drawText(game.getTileString(i, j), i * width + x, j * height + y, foreground);
+			}
+		}
 		
 		//Draw selected tile
 		Paint selected = new Paint();
 		selected.setColor(getResources().getColor(R.color.selected));
 		canvas.drawRect(selRect, selected);
+		Paint setted = new Paint();
+		for (int i = 0; i < 9; i++)
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				if (game.getOrginTileValue(i, j) == 0 && game.getTileValue(i, j) != 0)
+				{
+					setted.setColor(Color.argb(127, 212, 255, 42));					
+					getRect(i, j, filter);
+					canvas.drawRect(filter, setted);
+				}		
+			}
+		}
 	}
 	public void setSelectedTile (int value)
 	{
 		Log.d("Input ", "X: " + String.valueOf(selX) + " Y: " + String.valueOf(selY) + "--" + String.valueOf(value));
-		if (value == 0)
+		if (game.getOrginTileValue(selX, selY) != 0)
+		{
+			return;
+		}
+		else if (value == 0)
 		{
 			game.setTile(selX, selY, 0);
 			invalidate();

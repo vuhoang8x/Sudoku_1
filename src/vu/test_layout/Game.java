@@ -22,6 +22,7 @@ public class Game extends Activity
 									  "000000700706040102004000000" +
 									  "000720903090301080000000600";
 	public int soduku[][] = new int[9][9];
+	public int sudoku_org[][] = new int [9][9];
 	public int uselog[] = new int[9*9];
 	public static final int maxrow = 9;
 	public static final int maxcol = 9;
@@ -56,6 +57,7 @@ public class Game extends Activity
 			if (x < begin*9)
 			{
 				soduku[i][j] = sudoku_tile.charAt(x) - '0';
+				sudoku_org[i][j] = sudoku_tile.charAt(x) - '0';
 				j++;
 			}
 			else
@@ -64,6 +66,7 @@ public class Game extends Activity
 				begin++;
 				j = 0;
 				soduku[i][j] = sudoku_tile.charAt(x) - '0';
+				sudoku_org[i][j] = sudoku_tile.charAt(x) - '0';
 				j++;
 			}
 		}
@@ -77,6 +80,14 @@ public class Game extends Activity
 			return "";
 		return String.valueOf(soduku[x][y]);
 	}	
+	public int getTileValue (int x, int y)
+	{
+		return soduku[x][y];
+	}
+	public int getOrginTileValue(int x, int y)
+	{
+		return sudoku_org[x][y];
+	}
 	public int[] getValidOfBox(int x, int y)
 	{
 		int valid[] = new int[9];

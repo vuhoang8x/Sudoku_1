@@ -12,4 +12,8 @@
     <string name="medium_label">Medium</string>
     <string name="hard_label">Hard</string>
 	<string name="board">Soduku Board</string>
+	<string name="about_title">About</string>
+	<string name="about_text">Rule: Fill each row, each colum ,
+	    and each of the 3x3 boxes contains the digits 1 to 9 exactly once.</string>
+	<string name="about_license">Check out project from https://github.com/vuhoang8x/Sudoku_1.git</string>
 </resources>

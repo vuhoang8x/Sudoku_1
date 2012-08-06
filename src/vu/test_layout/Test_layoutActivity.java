@@ -22,6 +22,8 @@ public class Test_layoutActivity extends Activity implements OnClickListener{
         btnNew.setOnClickListener(this);
         Button btnContinue = (Button)findViewById(R.id.btnContinue);       
         btnContinue.setOnClickListener(this);
+        Button btnAbout = (Button)findViewById(R.id.btnAbout);
+        btnAbout.setOnClickListener(this);
     }
   
     public void onClick(View view)
@@ -33,6 +35,10 @@ public class Test_layoutActivity extends Activity implements OnClickListener{
     		break;
     	case R.id.btnNew:
     		openNewGameDialog();
+    		break;
+    	case R.id.btnAbout:
+    		Intent i = new Intent (Test_layoutActivity.this, About.class);
+    		startActivity(i);
     		break;
     	}
     }
